@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050b1a">
+    <title>CyberQuiz | Operação Identidade Segura</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+    <header class="topbar">
+        <a class="brand" href="#" aria-label="CyberQuiz início">
+            <span class="brand-icon">⬡</span>
+            <span>CYBER<span class="blue-text">QUIZ</span></span>
+        </a>
+        <div class="status">
+            <span class="status-dot"></span>
+            SISTEMA ONLINE
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- TELA INICIAL -->
+        <section id="start-screen" class="panel start-screen">
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                MISSÃO ESPECIAL • SEGURANÇA DIGITAL
+            </div>
+
+            <div class="hero-symbol" aria-hidden="true">
+                <div class="hero-ring ring-one"></div>
+                <div class="hero-ring ring-two"></div>
+                <div class="shield">⬡</div>
+                <div class="lock">🔒</div>
+            </div>
+
+            <h1>OPERAÇÃO<br><span class="blue-text">IDENTIDADE SEGURA</span></h1>
+
+            <p class="subtitle">
+                Sua missão é identificar ameaças digitais,
+                proteger seus dados e aprender a agir com segurança na internet.
+            </p>
+
+            <div class="mission-info">
+                <div><span class="info-icon">🎯</span><strong>8 desafios</strong></div>
+                <div><span class="info-icon">⚡</span><strong>XP e níveis</strong></div>
+                <div><span class="info-icon">🏅</span><strong>Medalhas</strong></div>
+            </div>
+
+            <form id="start-form" class="start-form">
+                <label for="player-name">IDENTIFICAÇÃO DO AGENTE</label>
+                <input
+                    id="player-name"
+                    type="text"
+                    maxlength="24"
+                    placeholder="Digite seu nome ou apelido"
+                    autocomplete="nickname"
+                    required
+                >
+
+                <label class="toggle-row" for="timer-toggle">
+                    <span>
+                        <strong>Modo contra o tempo</strong>
+                        <small>20 segundos por pergunta</small>
+                    </span>
+                    <input type="checkbox" id="timer-toggle">
+                    <span class="toggle-visual" aria-hidden="true"></span>
+                </label>
+
+                <button class="primary-button" type="submit">
+                    INICIAR OPERAÇÃO <span>→</span>
+                </button>
+            </form>
+
+            <p class="disclaimer">
+                Treinamento educativo com situações fictícias.
+                Nunca informe senhas ou códigos reais.
+            </p>
+        </section>
+
+        <!-- TELA DO QUIZ -->
+        <section id="quiz-screen" class="panel quiz-screen hidden">
+            <div class="quiz-topline">
+                <span class="eyebrow">AGENTE: <strong id="display-name">AGENTE</strong></span>
+                <span id="timer-box" class="timer-box hidden">⏱ <span id="timer">20</span>s</span>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">EXPERIÊNCIA</span>
+                    <strong><span id="xp">0</span> XP</strong>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">NÍVEL</span>
+                    <strong id="level">Iniciante</strong>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">ACERTOS</span>
+                    <strong id="correct-count">0/8</strong>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span id="question-counter">DESAFIO 01 / 08</span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div
+                    class="progress-track"
+                    role="progressbar"
+                    aria-label="Progresso do quiz"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    id="progress-track"
+                >
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="question-category" id="question-category">SEGURANÇA DIGITAL</div>
+            <h2 id="question-text">Carregando desafio...</h2>
+            <p id="question-context" class="question-context"></p>
+
+            <div id="options" class="options"></div>
+
+            <div id="feedback" class="feedback hidden" role="status" aria-live="polite"></div>
+
+            <div class="quiz-actions">
+                <button id="back-button" class="secondary-button" type="button">
+                    ← VOLTAR
+                </button>
+                <button id="next-button" class="primary-button" type="button" disabled>
+                    PRÓXIMO DESAFIO →
+                </button>
+            </div>
+
+            <p class="quiz-tip">DICA: pense antes de clicar. Sua segurança começa com uma boa decisão.</p>
+        </section>
+
+        <!-- TELA FINAL -->
+        <section id="result-screen" class="panel result-screen hidden">
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                RELATÓRIO DA OPERAÇÃO
+            </div>
+
+            <div id="result-icon" class="result-icon">🏆</div>
+            <p class="result-kicker">MISSÃO CONCLUÍDA</p>
+            <h1 id="result-title">PARABÉNS, AGENTE!</h1>
+            <p id="result-message" class="subtitle"></p>
+
+            <div class="final-score">
+                <div id="score-ring" class="score-ring">
+                    <div>
+                        <strong id="final-percent">0%</strong>
+                        <span>DE ACERTOS</span>
+                    </div>
+                </div>
+                <div class="score-details">
+                    <div><span>PONTUAÇÃO</span><strong id="final-xp">0 XP</strong></div>
+                    <div><span>RESPOSTAS CERTAS</span><strong id="final-correct">0 de 8</strong></div>
+                    <div><span>NÍVEL CONQUISTADO</span><strong id="final-level">Iniciante</strong></div>
+                </div>
+            </div>
+
+            <div class="achievements-section">
+                <h2>🏅 SUAS CONQUISTAS</h2>
+                <div id="badges" class="badges"></div>
+            </div>
+
+            <div class="review-section">
+                <h2>📡 RELATÓRIO DE APRENDIZADO</h2>
+                <p id="review-text"></p>
+            </div>
+
+            <button id="restart-button" class="primary-button" type="button">
+                ↻ JOGAR NOVAMENTE
+            </button>
+            <p class="disclaimer">Continue praticando para se tornar um Guardião Digital!</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>CYBERQUIZ v1.0</span>
+        <span>PROTEJA SEUS DADOS. PENSE ANTES DE CLICAR.</span>
+    </footer>
+</body>
+</html>
